@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Toshi Ossada\'s WebPages',
       theme: ThemeData(
-        colorScheme: const ColorScheme.dark(),
+        colorScheme: const ColorScheme.light(),
       ),
       home: const HomePage(),
     );
