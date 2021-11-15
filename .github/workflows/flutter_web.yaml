@@ -37,7 +37,8 @@ jobs:
           git status
           # change this remote url for examle your remote url is https://github.com/onatcipli/flutter_web.git then the following:
           git remote add origin https://${{secrets.token}}@github.com/onatcipli/flutter_web.git
+          git checkout -b gh-pages
           git add --all
           git commit -m "update"
-          git push origin main
+          git push origin gh-pages -f
 
