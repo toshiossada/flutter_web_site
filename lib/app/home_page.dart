@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
         height: double.infinity,
         child: Column(
           children: [
-            Image.asset('images/logo_toshi.png', height: 400,),
+            Image.asset('assets/images/logo_toshi.png', height: 400,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
