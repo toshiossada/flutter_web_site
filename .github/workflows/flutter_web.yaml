@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: action/checkout@v2
+        uses: actions/checkout@v1
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v1
@@ -26,7 +26,18 @@ jobs:
         run: flutter build web --release
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_tokens: ${{ secrets.token }}
-          publish_dir: .build/web
+      - run: |
+          cd build/web
+          git init
+          # type configurations: your user.email and user.name followed lines 
+          # git config --global user.email your_email 
+          # git config --global user.name your_name 
+          git config --global user.email onatcipli@outlook.com
+          git config --global user.name onatcipli
+          git status
+          # change this remote url for examle your remote url is https://github.com/onatcipli/flutter_web.git then the following:
+          git remote add origin https://${{secrets.token}}@github.com/onatcipli/flutter_web.git
+          git add --all
+          git commit -m "update"
+          git push origin main
+
