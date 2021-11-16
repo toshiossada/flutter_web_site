@@ -30,7 +30,6 @@ jobs:
           git init
           git config --global user.email toshiossada@gmail.com
           git config --global user.name toshiossada
-          git config --global init.defaultBranch main
           git status
           git remote add origin https://${{secrets.token}}@github.com/toshiossada/toshiossada.github.io.git
           git checkout -b gh-pages
