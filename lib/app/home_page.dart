@@ -52,7 +52,7 @@ launchMailto() async {
     final mailtoLink = Mailto(
         to: ['toshiossada@gmail.com'],
         cc: [],
-        subject: 'Contatot',
+        subject: 'Contato',
     );
 
     await launch('$mailtoLink');
