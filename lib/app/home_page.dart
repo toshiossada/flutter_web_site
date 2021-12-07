@@ -50,7 +50,7 @@ void _launchURL(String url) async =>
 
 launchMailto() async {
     final mailtoLink = Mailto(
-        to: ['toshiossada@gmail.com'],
+        to: ['toshiossada@toshiossada.dev'],
         cc: [],
         subject: 'Contato',
     );
