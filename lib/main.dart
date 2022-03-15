@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seo_renderer/seo_renderer.dart';
 
 import 'app/home_page.dart';
 
@@ -11,12 +12,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Toshi Ossada\'s WebPages',
-      theme: ThemeData(
-        colorScheme: const ColorScheme.dark(),
+    return RobotDetector(
+      child: MaterialApp(
+        title: 'Toshi Ossada\'s WebPages',
+        theme: ThemeData(
+          colorScheme: const ColorScheme.dark(),
+        ),
+        navigatorObservers: [seoRouteObserver],
+        home: const HomePage(),
       ),
-      home: const HomePage(),
     );
   }
 }
