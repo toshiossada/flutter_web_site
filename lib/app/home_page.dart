@@ -15,12 +15,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const TextRenderer(
-          style: TextRendererStyle.header1,
-          child: Text('Toshi Ossada'),
-        ),
-      ),
+
       body: SizedBox(
         height: double.infinity,
         child: Column(
@@ -46,10 +41,10 @@ class _HomePageState extends State<HomePage> {
                 ),
                 LinkRenderer(
                   text: 'Toshi Ossada Facebook',
-                  href: 'https://www.facebook.com/ToshiOssada/',
+                  href: 'https://www.facebook.com/ToshiOssadaa/',
                   child: IconButton(
                       onPressed: () =>
-                          _launchURL('https://github.com/toshiossada/'),
+                          _launchURL('https://github.com/toshiossadaa/'),
                       icon: const FaIcon(FontAwesomeIcons.github)),
                 ),
                 LinkRenderer(

@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return RobotDetector(
       child: MaterialApp(
-        title: 'Toshi Ossada\'s WebPages',
+        title: 'Toshi Ossada',
         theme: ThemeData(
           colorScheme: const ColorScheme.dark(),
         ),
