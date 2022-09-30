@@ -15,7 +15,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: SizedBox(
         height: double.infinity,
         child: Column(
@@ -40,11 +39,11 @@ class _HomePageState extends State<HomePage> {
                       icon: const FaIcon(FontAwesomeIcons.facebook)),
                 ),
                 LinkRenderer(
-                  text: 'Toshi Ossada Facebook',
-                  href: 'https://www.facebook.com/ToshiOssadaa/',
+                  text: 'Toshi Ossada gITHUB',
+                  href: 'https://github.com/toshiossada/',
                   child: IconButton(
                       onPressed: () =>
-                          _launchURL('https://github.com/toshiossadaa/'),
+                          _launchURL('https://github.com/toshiossada/'),
                       icon: const FaIcon(FontAwesomeIcons.github)),
                 ),
                 LinkRenderer(
