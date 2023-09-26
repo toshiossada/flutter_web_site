@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 LinkRenderer(
                   text: 'Toshi Ossada Facebook',
-                  href: 'https://www.facebook.com/ToshiOssad/',
+                  href: 'https://www.facebook.com/ToshiOssada/',
                   child: IconButton(
                       onPressed: () =>
                           _launchURL('https://www.facebook.com/ToshiOssada/'),
