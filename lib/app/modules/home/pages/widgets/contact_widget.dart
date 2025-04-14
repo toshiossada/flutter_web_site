@@ -9,8 +9,8 @@ class ContactWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return Wrap(
+      alignment: WrapAlignment.spaceEvenly,
       children: <Widget>[
         SocialButtonWidget(
           text: 'Flutter Brasil Youtube Channel',

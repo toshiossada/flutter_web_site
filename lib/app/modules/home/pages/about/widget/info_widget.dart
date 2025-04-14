@@ -22,7 +22,7 @@ class InfoWidget extends StatelessWidget {
         SizedBox.square(
           dimension: 32,
         ),
-        Row(
+        Wrap(
           children: [
             ImageRenderer(
               alt: 'Dart',
@@ -58,7 +58,7 @@ class InfoWidget extends StatelessWidget {
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Row(
+            child: Wrap(
               children: [
                 ImageRenderer(
                   alt: 'Flutter',
