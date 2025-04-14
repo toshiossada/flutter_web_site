@@ -94,6 +94,15 @@
         });
       }
     </script>
+    <script>
+      const regExp = new RegExp(
+        "bot|google|baidu|bing|msn|teoma|slurp|yandex",
+        "i"
+      );
+      if (regExp.test(navigator.userAgent)) {
+        window.flutterWebRenderer = "html";
+      }
+    </script>
     <script defer src="main.dart.js" type="application/javascript"></script>
   </head>
   <body></body>
