@@ -40,9 +40,15 @@ class _AppWidgetState extends State<AppWidget> {
                 if (locale?.languageCode == 'pt') {
                   finalLocale == Locale('pt', 'BR');
                 }
-                if (controller.locale != finalLocale) {
-                  controller.locale = finalLocale;
-                }
+
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  if (mounted) {
+                    if (controller.locale != finalLocale) {
+                      controller.locale = finalLocale;
+                    }
+                  }
+                });
+
                 return finalLocale;
               },
               localizationsDelegates: [
