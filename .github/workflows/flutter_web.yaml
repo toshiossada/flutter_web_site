@@ -27,6 +27,7 @@ jobs:
       - name: Deploy
         run: |
           cd build/web
+          echo 'toshiossada.dev' > CNAME
           git init
           git config --global user.email toshiossada@gmail.com
           git config --global user.name toshiossada
