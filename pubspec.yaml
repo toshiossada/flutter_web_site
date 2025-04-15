@@ -11,6 +11,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
   cupertino_icons: ^1.0.2
   font_awesome_flutter: ^10.8.0
@@ -18,8 +22,9 @@ dependencies:
   mailto: ^2.0.0
   seo_renderer: ^0.6.0
   flutter_modular: ^6.3.4
-  intl: ^0.20.2
+  intl: ^0.19.0
   timeline_tile: ^2.0.0
+  localization: ^2.1.1
 
 dev_dependencies:
   flutter_test:
@@ -34,3 +39,5 @@ flutter:
     - assets/images/awards/
     - assets/images/flutterbrasil/
     - assets/experiences.json
+    - assets/experiences_enUs.json
+    - assets/lang/

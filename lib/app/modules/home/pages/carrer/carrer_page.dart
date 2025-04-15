@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:timeline_tile/timeline_tile.dart'; // Import the package
+import 'package:localization/localization.dart';
+import 'package:timeline_tile/timeline_tile.dart';
 
 import 'carrer_controller.dart';
 
@@ -25,31 +26,28 @@ class _CarrerPageState extends State<CarrerPage> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context); // Get theme for consistent styling
+    final theme = Theme.of(context);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Expêriencia"),
-        backgroundColor: Colors.transparent, // Keep transparent if desired
+        title: Text("experience".i18n()),
+        backgroundColor: Colors.transparent,
         elevation: 0,
       ),
       body: ListenableBuilder(
         listenable: controller.store,
         builder: (context, child) {
-          // --- Loading State ---
           if (controller.store.loading) {
             return const Center(child: CircularProgressIndicator());
           }
 
-          // --- Empty State ---
           if (controller.store.experience.isEmpty) {
             return const Center(child: Text("Nenhuma experiência encontrada."));
           }
 
-          // --- Success State (Timeline) ---
           return ListView.builder(
-            padding: const EdgeInsets.symmetric(
-                horizontal: 16.0, vertical: 8.0), // Add padding
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             itemCount: controller.store.experience.length,
             itemBuilder: (context, index) {
               final experience = controller.store.experience[index];
@@ -58,59 +56,48 @@ class _CarrerPageState extends State<CarrerPage> {
 
               return TimelineTile(
                 alignment: TimelineAlign.manual,
-                lineXY: 0.15, // Position the line slightly to the left
+                lineXY: 0.15,
                 isFirst: isFirst,
                 isLast: isLast,
-                // Style the indicator (the dot on the timeline)
                 indicatorStyle: IndicatorStyle(
                   width: 20,
                   height: 20,
-                  indicatorXY: 0.5, // Center the indicator on the line
+                  indicatorXY: 0.5,
                   indicator: Container(
                     decoration: BoxDecoration(
-                      color: theme.colorScheme.primary, // Use primary color
+                      color: theme.colorScheme.primary,
                       shape: BoxShape.circle,
                     ),
                   ),
-                  padding: const EdgeInsets.all(6), // Padding around indicator
+                  padding: const EdgeInsets.all(6),
                 ),
-                // Style the line before the indicator
                 beforeLineStyle: LineStyle(
-                  color: theme.colorScheme.primary
-                      .withOpacity(0.5), // Lighter primary color
+                  color: theme.colorScheme.primary.withValues(alpha: (255 / 2)),
                   thickness: 2,
                 ),
-                // Style the line after the indicator
                 afterLineStyle: LineStyle(
-                  color: theme.colorScheme.primary.withOpacity(0.5),
+                  color: theme.colorScheme.primary.withValues(alpha: (255 / 2)),
                   thickness: 2,
                 ),
-                // Content for each timeline item
                 endChild: Container(
                   constraints: const BoxConstraints(
-                    minHeight: 120, // Ensure minimum height for spacing
+                    minHeight: 120,
                   ),
                   padding: const EdgeInsets.only(
-                      left: 16.0,
-                      top: 8.0,
-                      bottom: 16.0,
-                      right: 8.0), // Padding for content
+                      left: 16.0, top: 8.0, bottom: 16.0, right: 8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment:
-                        MainAxisAlignment.center, // Center content vertically
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // Date Range (Formatted MM/yyyy - MM/yyyy or Atual)
                       Text(
                         '${experience.formattedStart} - ${experience.formattedEnd}',
                         style: theme.textTheme.bodySmall?.copyWith(
-                          color: theme.colorScheme.onSurface.withOpacity(0.7),
+                          color: theme.colorScheme.onSurface
+                              .withValues(alpha: (255 * 0.7)),
                           fontWeight: FontWeight.w500,
                         ),
                       ),
                       const SizedBox(height: 4),
-
-                      // Company Name
                       Text(
                         experience.company,
                         style: theme.textTheme.titleMedium?.copyWith(
@@ -118,22 +105,19 @@ class _CarrerPageState extends State<CarrerPage> {
                         ),
                       ),
                       const SizedBox(height: 4),
-
-                      // Role
                       Text(
                         experience.role,
                         style: theme.textTheme.titleSmall?.copyWith(
                           fontStyle: FontStyle.italic,
-                          color: theme.colorScheme.onSurface.withOpacity(0.8),
+                          color: theme.colorScheme.onSurface
+                              .withValues(alpha: (255 * 0.8)),
                         ),
                       ),
                       const SizedBox(height: 8),
-
-                      // Description (using ExpansionTile for collapsibility)
                       ExpansionTile(
-                        tilePadding: EdgeInsets.zero, // Remove default padding
+                        tilePadding: EdgeInsets.zero,
                         title: Text(
-                          'Detalhes',
+                          'details'.i18n(),
                           style: theme.textTheme.bodySmall?.copyWith(
                             color: theme.colorScheme.primary,
                           ),
@@ -149,8 +133,7 @@ class _CarrerPageState extends State<CarrerPage> {
                                     children: [
                                       const Text("• ",
                                           style: TextStyle(
-                                              fontWeight: FontWeight
-                                                  .bold)), // Bullet point
+                                              fontWeight: FontWeight.bold)),
                                       Expanded(
                                           child: Text(desc,
                                               style:

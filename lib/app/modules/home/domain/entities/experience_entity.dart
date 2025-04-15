@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'package:localization/localization.dart';
 
 class ExperienceEntity {
   final String company;
@@ -18,7 +19,7 @@ class ExperienceEntity {
 
   String get formattedEnd {
     if (end == null) {
-      return "Atual";
+      return "current".i18n();
     } else {
       return DateFormat('MM/yyyy').format(end!);
     }

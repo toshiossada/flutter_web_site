@@ -1,17 +1,17 @@
 import 'dart:convert'; // For jsonDecode
 
-import 'package:flutter/services.dart' show rootBundle; 
-
+import 'package:flutter/services.dart' show rootBundle;
 
 import '../repositories/datasources/experience_datasource.dart';
 import '../repositories/models/experience_model.dart';
 
 class ExperienceDatasourceImpl implements ExperienceDatasource {
-  final String _assetPath = 'assets/experiences.json';
+  final String _assetPath = 'assets/experiences_enUs.json';
+  final String _assetPathEnUs = 'assets/experiences.json';
 
   @override
-  Future<List<ExperienceModel>> getExperiences() async {
-    final jsonString = await rootBundle.loadString(_assetPath);
+  Future<List<ExperienceModel>> getExperiences(bool isPtBr) async {
+    final jsonString = await rootBundle.loadString(isPtBr ? _assetPath : _assetPathEnUs);
 
     final decodedJson = jsonDecode(jsonString) as Map<String, dynamic>;
 
@@ -37,4 +37,3 @@ class ExperienceDatasourceImpl implements ExperienceDatasource {
     }
   }
 }
-

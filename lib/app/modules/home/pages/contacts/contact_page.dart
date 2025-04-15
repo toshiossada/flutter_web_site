@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:localization/localization.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../widgets/contact_widget.dart';
@@ -25,8 +26,8 @@ class ContactPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Text(
-              'Entre em Contato',
+            Text(
+              'get_in_touch'.i18n(),
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -36,7 +37,7 @@ class ContactPage extends StatelessWidget {
             const SizedBox(height: 30),
             ContactTileWidget(
               icon: Icons.phone_android,
-              title: 'Telefone',
+              title: 'phone'.i18n(),
               subtitle: '+55 (19) 99120-0273',
               url: '5519991200273',
               urlType: UrlTypeEnum.tel,
@@ -54,7 +55,7 @@ class ContactPage extends StatelessWidget {
             const Divider(color: Colors.grey, indent: 16, endIndent: 16),
             ContactTileWidget(
               icon: Icons.location_pin,
-              title: 'Endereço',
+              title: 'address'.i18n(),
               subtitle: 'Americana - SP',
               url:
                   'https://www.google.com/maps/search/?api=1&query=Americana,SP',
@@ -62,8 +63,8 @@ class ContactPage extends StatelessWidget {
               onPressed: _launchUrl,
             ),
             const SizedBox(height: 40),
-            const Text(
-              'Siga',
+            Text(
+              'follow'.i18n(),
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,

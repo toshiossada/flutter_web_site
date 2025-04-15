@@ -10,8 +10,8 @@ class ExperienceRepositoryImpl implements ExperienceRepository {
   ExperienceRepositoryImpl({required this.datasource, required this.mapper});
 
   @override
-  Future<List<ExperienceEntity>> getExperiences() async {
-    final experiences = await datasource.getExperiences();
+  Future<List<ExperienceEntity>> getExperiences(bool isPtBr) async {
+    final experiences = await datasource.getExperiences(isPtBr);
 
     return experiences.map(mapper.toEntity).toList();
   }

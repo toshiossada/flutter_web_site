@@ -1,25 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:localization/localization.dart';
 import 'package:seo_renderer/seo_renderer.dart';
 
+import 'initial_page_controller.dart';
+
 class InitialPage extends StatefulWidget {
-  const InitialPage({super.key});
+  final InitialPageController controller;
+  const InitialPage({super.key, required this.controller});
 
   @override
   State<InitialPage> createState() => _InitialPageState();
 }
 
 class _InitialPageState extends State<InitialPage> {
-  var selectedIndex = 0; // Keep track of the selected index for highlighting
+  InitialPageController get controller => widget.controller;
 
-  // Define a breakpoint for switching between layouts
-  static const double _breakpoint = 700.0; // Adjust as needed
+  var selectedIndex = 0;
+
+  static const double _breakpoint = 700.0;
 
   @override
   void initState() {
     super.initState();
-    // Navigate to the initial route when the page loads
-    // Check if the current route matches any page, otherwise default to 'about'
+
     final currentRoute = Modular.to.path;
     bool routeMatched = false;
     for (var page in PagesEnum.values) {
@@ -30,23 +34,21 @@ class _InitialPageState extends State<InitialPage> {
       }
     }
     if (!routeMatched) {
-      selectedIndex = PagesEnum.about.pageIndex; // Default index
-      // Use pushReplacementNamed to avoid adding to history if already at root
+      selectedIndex = PagesEnum.about.pageIndex;
+
       Modular.to.pushReplacementNamed(PagesEnum.about.route);
     }
   }
 
-  // Helper function to build navigation items (used in AppBar actions and Drawer)
   List<Widget> _buildNavigationItems(BuildContext context, bool isDrawer) {
     return List.generate(PagesEnum.values.length, (index) {
       final page = PagesEnum.values[index];
       final isSelected = page.pageIndex == selectedIndex;
 
-      // Use ListTile for Drawer, Padding/InkWell for AppBar
       if (isDrawer) {
         return ListTile(
           title: Text(
-            page.description,
+            page.description.i18n(),
             style: TextStyle(
               fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
             ),
@@ -54,17 +56,15 @@ class _InitialPageState extends State<InitialPage> {
           selected: isSelected,
           onTap: () {
             Modular.to.navigate(page.route);
-            Navigator.pop(context); // Close the drawer
+            Navigator.pop(context);
             setState(() {
               selectedIndex = page.pageIndex;
             });
           },
         );
       } else {
-        // AppBar Actions
         return Padding(
-          padding:
-              const EdgeInsets.symmetric(horizontal: 16.0), // Adjust padding
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: InkWell(
             onTap: () {
               Modular.to.navigate(page.route);
@@ -73,16 +73,15 @@ class _InitialPageState extends State<InitialPage> {
               });
             },
             child: Center(
-              // Center text vertically in AppBar
               child: Text(
-                page.description,
+                page.description.i18n(),
                 style: TextStyle(
-                  fontSize: 18, // Slightly smaller for AppBar
+                  fontSize: 18,
                   fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                   decoration: isSelected
                       ? TextDecoration.underline
                       : TextDecoration.none,
-                  decorationThickness: 2.0, // Make underline more visible
+                  decorationThickness: 2.0,
                 ),
               ),
             ),
@@ -92,15 +91,57 @@ class _InitialPageState extends State<InitialPage> {
     });
   }
 
+  Widget _buildLanguageMenu() {
+    return PopupMenuButton<Locale>(
+      tooltip: "change_language".i18n(),
+      onSelected: (Locale newLocale) {
+        controller.appStore.locale = newLocale;
+        setState(() {});
+      },
+      child: Row(
+        children: [
+          Text(
+            controller.appStore.supportedLocales[controller.appStore.locale] ??
+                '',
+          ),
+          SizedBox.square(
+            dimension: 10,
+          ),
+          Icon(
+            Icons.language,
+            color: Theme.of(context).appBarTheme.actionsIconTheme?.color,
+          ),
+        ],
+      ),
+      itemBuilder: (BuildContext context) {
+        return controller.appStore.supportedLocales.entries.map((entry) {
+          final locale = entry.key;
+          final name = entry.value;
+
+          final bool isSelected = controller.appStore.locale == locale ||
+              (controller.appStore.locale == null &&
+                  WidgetsBinding.instance.platformDispatcher.locale == locale);
+
+          return PopupMenuItem<Locale>(
+            value: locale,
+            child: Text(
+              name,
+              style: TextStyle(
+                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+              ),
+            ),
+          );
+        }).toList();
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    // Use MediaQuery to get screen width
     final screenWidth = MediaQuery.of(context).size.width;
     final bool isSmallScreen = screenWidth < _breakpoint;
 
     return Scaffold(
-      // Use endDrawer for drawer appearing from the right (common with actions replacement)
-      // Or use drawer for standard left-side drawer
       drawer: isSmallScreen
           ? Drawer(
               child: ListView(
@@ -111,7 +152,6 @@ class _InitialPageState extends State<InitialPage> {
                       color: Theme.of(context).primaryColor,
                     ),
                     child: Row(
-                      // Similar title as AppBar
                       children: [
                         ImageRenderer(
                           alt: 'Toshi Ossada Logo',
@@ -128,66 +168,63 @@ class _InitialPageState extends State<InitialPage> {
                       ],
                     ),
                   ),
-                  ..._buildNavigationItems(context, true), // Build drawer items
+                  _buildLanguageMenu(),
+                  ..._buildNavigationItems(context, true),
                 ],
               ),
             )
-          : null, // No drawer on large screens
+          : null,
       appBar: AppBar(
-        // Automatically shows hamburger icon if drawer is present and leading is null
-        // leading: isSmallScreen ? null : SizedBox(), // Explicitly control if needed
         title: GestureDetector(
           onTap: () {
-            Modular.to.navigate(PagesEnum.about.route); // Navigate to default
+            Modular.to.navigate(PagesEnum.about.route);
             setState(() {
               selectedIndex = PagesEnum.about.pageIndex;
             });
           },
           child: Row(
-            mainAxisSize:
-                MainAxisSize.min, // Prevent Row from taking full width
+            mainAxisSize: MainAxisSize.min,
             children: [
               ImageRenderer(
                 alt: 'Toshi Ossada Logo',
                 child: Image.asset(
                   'assets/images/favicon.png',
-                  height: 40, // Consistent height
+                  height: 40,
                 ),
               ),
-              const SizedBox(width: 15), // Consistent spacing
+              const SizedBox(width: 15),
               const Text('Toshi Ossada'),
             ],
           ),
         ),
         actions: isSmallScreen
-            ? null // No actions on small screens (use drawer)
+            ? null
             : [
-                ..._buildNavigationItems(
-                    context, false), // Build AppBar actions
-                const SizedBox(width: 16), // Add some trailing space
+                _buildLanguageMenu(),
+                ..._buildNavigationItems(context, false),
+                const SizedBox(width: 16),
               ],
       ),
-      body: const RouterOutlet(), // Your page content based on route
+      body: const RouterOutlet(),
     );
   }
 }
 
-// --- PagesEnum remains the same ---
 enum PagesEnum {
   about(
     pageIndex: 0,
     route: '/about',
-    description: 'Sobre',
+    description: 'about',
   ),
   carrer(
     pageIndex: 1,
     route: '/carrer',
-    description: 'Carreira',
+    description: 'carrer',
   ),
   contact(
     pageIndex: 2,
     route: '/contact',
-    description: 'Contato',
+    description: 'contact',
   );
 
   const PagesEnum({

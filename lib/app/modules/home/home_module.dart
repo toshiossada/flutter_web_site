@@ -1,7 +1,9 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:homepage/app/modules/home/data/repositories/datasources/experience_datasource.dart';
 import 'package:homepage/app/modules/home/pages/initial/initial_page.dart';
+import 'package:homepage/app/modules/home/pages/initial/initial_page_controller.dart';
 
+import '../../../core_module.dart';
 import 'data/datasource/experience_datasource_impl.dart';
 import 'data/mappers/experience_mapper.dart';
 import 'data/repositories/experience_repository_impl.dart';
@@ -16,8 +18,11 @@ import 'pages/generator/experiences_pages.dart';
 
 class HomeModule extends Module {
   @override
+  List<Module> get imports => [CoreModule()];
+  @override
   void binds(Injector i) {
     i
+      ..add(InitialPageController.new)
       ..add(CarrerStore.new)
       ..add(CarrerController.new)
       ..add(GetExperiencesUsecase.new)
@@ -29,14 +34,18 @@ class HomeModule extends Module {
   @override
   void routes(RouteManager r) {
     r
-      ..child('/', child: (_) => InitialPage(), children: [
-        ChildRoute('/about', child: (_) => AboutPage()),
-        ChildRoute('/contact', child: (_) => ContactPage()),
-        ChildRoute('/carrer',
-            child: (_) => CarrerPage(
-                  controller: Modular.get<CarrerController>(),
-                )),
-      ])
+      ..child('/',
+          child: (_) => InitialPage(
+                controller: Modular.get(),
+              ),
+          children: [
+            ChildRoute('/about', child: (_) => AboutPage()),
+            ChildRoute('/contact', child: (_) => ContactPage()),
+            ChildRoute('/carrer',
+                child: (_) => CarrerPage(
+                      controller: Modular.get<CarrerController>(),
+                    )),
+          ])
       ..child('/experiences-generator', child: (_) => ExperiencesPage());
   }
 }

@@ -7,7 +7,7 @@ class GetExperiencesUsecase {
 
   GetExperiencesUsecase({required this.repository});
 
-  Future<List<ExperienceEntity>> call() async {
-    return await repository.getExperiences();
+  Future<List<ExperienceEntity>> call(bool isPtBr) {
+    return repository.getExperiences(isPtBr);
   }
 }

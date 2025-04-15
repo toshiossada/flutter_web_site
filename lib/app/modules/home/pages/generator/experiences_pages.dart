@@ -33,11 +33,11 @@ class _ExperiencesPageState extends State<ExperiencesPage> {
             ElevatedButton(
                 onPressed: () {
                   final companyRegex = RegExp(
-                    r'^(.+) – (\d\d\/\d\d\d\d) até (\d\d\/\d\d\d\d)$',
+                    r'^(.+)( \W )(\d\d\/\d\d\d\d) [A-Za-zA-é]+ (\d\d\/\d\d\d\d)$',
                     multiLine: true,
                   );
                   final roleRegex = RegExp(
-                    r'^Cargo: (.+)$',
+                    r'^(Cargo|Role): (.+)$',
                     multiLine: true,
                   );
                   final descriptionRegex = RegExp(
@@ -50,9 +50,9 @@ class _ExperiencesPageState extends State<ExperiencesPage> {
                       descriptionRegex.allMatches(txt.text);
 
                   final company = companyMatch.first.group(1);
-                  final start = companyMatch.first.group(2);
-                  final end = companyMatch.first.group(3);
-                  final role = roleMatch.first.group(1);
+                  final start = companyMatch.first.group(3);
+                  final end = companyMatch.first.group(4);
+                  final role = roleMatch.first.group(2);
                   final description =
                       descriptionMatch.map((e) => '"${e.group(1)}"').toList();
 
