@@ -49,7 +49,7 @@ class InfoWidget extends StatelessWidget {
         ),
         TextRenderer(
           child: SelectableText(
-            'main-description'.i18n(),
+            'main_description'.i18n(),
           ),
         ),
         GestureDetector(

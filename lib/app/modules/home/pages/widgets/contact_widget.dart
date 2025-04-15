@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:localization/localization.dart';
 
 import 'social_button_widget.dart';
 
@@ -65,7 +66,7 @@ class ContactWidget extends StatelessWidget {
           icon: FontAwesomeIcons.solidEnvelope,
           url: 'mailto:toshiossada@toshiossada.dev',
           color: Colors.grey[400]!,
-          tooltip: 'Enviar Email',
+          tooltip: 'send_email'.i18n(),
           onPressed: onPressed,
         ),
       ],

@@ -2,7 +2,7 @@
     "about": "About",
     "carrer": "Carrer",
     "contact": "Contact",
-    "main-description": "A Microsoft Most Valuable Professional (MVP) and Google Developer Expert (GDE) in Flutter and Dart, with over 18 years of experience in software development.  A postgraduate degree in Software Engineering complements a strong background in building high-quality mobile applications using Flutter. Expertise in team leadership, project management, and stakeholder communication, along with a passion for community building and knowledge sharing as demonstrated by founding Flutter Brasil.",
+    "main_description": "A Microsoft Most Valuable Professional (MVP) and Google Developer Expert (GDE) in Flutter and Dart, with over 18 years of experience in software development.  A postgraduate degree in Software Engineering complements a strong background in building high-quality mobile applications using Flutter. Expertise in team leadership, project management, and stakeholder communication, along with a passion for community building and knowledge sharing as demonstrated by founding Flutter Brasil.",
     "details": "Details",
     "get_in_touch": "Get in Touch",
     "change_language": "Change Language",
@@ -11,5 +11,6 @@
     "phone": "Phone",
     "address": "Address",
     "current": "Current",
+    "send_email": "Send Email",
     "experience": "Experience"
 }
