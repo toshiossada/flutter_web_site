@@ -7,6 +7,9 @@ on:
 
 jobs:
   build:
+    env:
+      TESTE3: "21"
+      CNAME: ${{ vars.CNAME }}
     runs-on: ubuntu-latest
 
     steps:
@@ -27,7 +30,7 @@ jobs:
       - name: Deploy
         run: |
           cd build/web
-          echo 'toshiossada.dev' > CNAME
+          echo '${{ env.CNAME }}' > CNAME
           git init
           git config --global user.email toshiossada@gmail.com
           git config --global user.name toshiossada
