@@ -26,7 +26,6 @@ dependencies:
   timeline_tile: ^2.0.0
   localization: ^2.1.1
   dio: ^5.8.0+1
-  flutter_svg: ^2.1.0
 
 dev_dependencies:
   flutter_test:
